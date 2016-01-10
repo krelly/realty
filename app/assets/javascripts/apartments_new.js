@@ -69,7 +69,11 @@ function YmapsReady() {
             var address = e.get('item').value
             input.val(address)
         })
-
+        $('.img-preview .preview').hover(function () {
+            $(this).append(`<div class="remove"></div>`)
+        }, function () {
+            $(this).find('.remove').remove()
+        })
     }
 
     if ($(".apartments.show").length) {

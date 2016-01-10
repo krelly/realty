@@ -1,35 +1,30 @@
 // Place all the styles related to the Apartments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
 .apartments.map {
-	#map {
-		width:100%;
-		height:600px;
-	}
+    #map {
+        width: 100%;
+        height: 600px;
+    }
 }
-
 .top-block {
-	display: flex;
-	address,
-	&.price,
-	&.offer-posted {
-		flex:1
-	}
+    display: flex;
+    &.offer-posted,
+    &.price,
+    address {
+        flex: 1;
+    }
 }
 #interactive-map {
-	height: 600px;
-	width: 600px;
+    height: 600px;
+    width: 600px;
 }
-#apartment_photos img{
-	height: 160px;
+#apartment_photos img {
+    height: 160px;
 }
-
 input[type="number"] {
-	width: 60px;
+    width: 60px;
 }
-
-
 .inputfile {
     width: 0.1px;
     height: 0.1px;
@@ -39,45 +34,64 @@ input[type="number"] {
     z-index: -1;
     font-family: sans-serif;
     & + label {
-    	font-size: 1.25em;
-	    font-weight: 700;
-	    display: inline-block;
-		cursor: pointer;
-	}
+        font-size: 1.25em;
+        font-weight: 700;
+        display: inline-block;
+        cursor: pointer;
+    }
 }
-
-.inputfile:focus + label,
-.inputfile + label:hover {
+.inputfile + label:hover,
+.inputfile:focus + label {
     color: cadetblue;
 }
-
 .box-upload {
-	$offset: 10px;
+    $offset: 10px;
     width: 500px + $offset;
     padding: 60px 30px;
     background-color: #c8dadf;
     outline: 2px dashed #92b0b3;
     outline-offset: -$offset;
-    transition-duration: .5s;
+    transition-duration: 0.5s;
     box-sizing: border-box;
     &.is-dragover {
-		background-color: whitesmoke;
+        background-color: whitesmoke;
+    }
+    .remove {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -15px;
+        margin-left: -15px;
+        background-image: image-url("bin.svg");
+        background-size: 21px 22px;
+		background-size: cover;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        &:hover {
+            background-image: image-url("bin-red.svg");
+        }
+    }
+    .preview {
+        margin-right: 10px;
+        position: relative;
+        display: inline-block;
+		transition-duration: 0.5s;
+    }
+	.preview:hover {
+		/*max-width: 115px;*/
+		-webkit-filter:brightness(70%);
 	}
-
     img {
-    	height: 110px;
-	    margin-right: 10px;
-	    &:hover {
-		    /*max-width: 115px;*/
-		    filter:brightness(70%);
-		}
-	}
-	.img-preview {
-		/*min-height: */
-	}
-	.comment {
-	    color: gray;
-	    font-size: 0.9em;
-	    font-weight: 500;
-	}
+        height: 110px;
+
+    }
+    .img-preview {
+        /*min-height: */
+    }
+    .comment {
+        color: gray;
+        font-size: 0.9em;
+        font-weight: 500;
+    }
 }

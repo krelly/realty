@@ -8,7 +8,7 @@ namespace :db do
   desc "Fill database with sample data"
   task :populate => :environment do
     ActiveRecord::Base.transaction do
-    10_000.times do |a|
+    10_00.times do |a|
       floor = 1+rand(10)
       price = 1+rand(1000)
       rooms = 1+rand(10)
