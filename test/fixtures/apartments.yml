@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  floor: 1
+  price: 9.99
+  rooms: 1
+  area: 9.99
+
+two:
+  description: MyText
+  floor: 1
+  price: 9.99
+  rooms: 1
+  area: 9.99
