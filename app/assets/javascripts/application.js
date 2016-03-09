@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require_tree .
 //= require jquery.geocomplete.min.js
+//= require google-places.js
