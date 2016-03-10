@@ -24,6 +24,11 @@
   <strong>Area:</strong>
   <%= @apartment.area %>
 </p>
+<p>
+  <strong>Address:</strong>
+  <%= @apartment.address %>
+</p>
+
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@apartment.latitude}%2C#{@apartment.longitude}" %>
 <%= link_to 'Edit', edit_apartment_path(@apartment) %> |
 <%= link_to 'Back', apartments_path %>

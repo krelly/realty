@@ -14,5 +14,4 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-//= require jquery.geocomplete.min.js
-//= require google-places.js
+//= require suggestView-2.1.js
