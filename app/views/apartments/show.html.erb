@@ -1,30 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<div class="top-block">
-  <address>
-    <h1>4-х комнатная квартира, <%= @apartment.address %></h1>
-  </address>
-  <div class="offer-left">
-    <div class="price"><%= @apartment.price %>
-      Р. в месяц</div>
-    <div class="offer-posted">
-      <% if @apartment.updated_at > @apartment.created_at %>
-      Изменено:
-      <%= time_ago_in_words(@apartment.updated_at) %>
-      назад
-      <% end %>
-      <br>
-      Размещено:
-      <%= time_ago_in_words(@apartment.created_at)%>
-      назад
-    </div>
-  </div>
+<% if @apartment.updated_at > @apartment.created_at %>
+  Изменено: <%= time_ago_in_words(@apartment.updated_at) %> назад
+<% end %>
+<br>
+Размещено: <%= time_ago_in_words(@apartment.created_at)%> назад
 
-</div>
+
+
+<p>
+  <strong>Description:</strong>
+  <%= @apartment.description %>
+</p>
 
 <p>
   <strong>Floor:</strong>
   <%= @apartment.floor %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @apartment.price %>
 </p>
 
 <p>
@@ -34,46 +30,14 @@
 
 <p>
   <strong>Area:</strong>
-  <%= @apartment.area %>м²
+  <%= @apartment.area %>
 </p>
-
-
-<div class="main-facts">
-  <div>
-    70 м²
-    <span>Общая</span>
-  </div>
-  <div>
-    46 м²
-    <span>Жилая</span>
-  </div>
-  <div>
-    8 м²
-    <span>Кухня</span>
-  </div>
-  <div>
-    3 комнаты
-    <span>17 м², 15 м² и 14 м²</span>
-  </div>
-  <div>
-    4 этаж
-    <span>Из 8 в доме</span>
-  </div>
-  <div>
-    1959
-    <span>Год постройки</span>
-  </div>
-</div>
-
 <p>
-  <strong>Description:</strong>
-  <%= @apartment.description %>
+  <strong>Address:</strong>
+  <%= @apartment.address %>
 </p>
 
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@apartment.latitude}%2C#{@apartment.longitude}" %>
-<br>
-Инф-я о агенте Фоточки
-<br>
-<%= link_to 'Edit', edit_apartment_path(@apartment) %>
-|
+<%= content_tag("div",nil,id:'interactive-map', data: {latitude: @apartment.latitude, longitude: @apartment.longitude}) %>
+
+<%= link_to 'Edit', edit_apartment_path(@apartment) %> |
 <%= link_to 'Back', apartments_path %>
