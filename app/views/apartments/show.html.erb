@@ -36,6 +36,11 @@
   <strong>Address:</strong>
   <%= @apartment.address %>
 </p>
+<div id="apartment_photos">
+    <% @apartment_photos.each do |p| %>
+        <%= image_tag p.photo %>
+    <% end %>
+</div>
 
 <%= content_tag("div",nil,id:'interactive-map', data: {latitude: @apartment.latitude, longitude: @apartment.longitude}) %>
 

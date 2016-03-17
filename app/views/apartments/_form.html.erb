@@ -40,6 +40,12 @@
     <%= f.hidden_field :latitude,'data-geo':"lat" %>
     <%= f.hidden_field :longitude,'data-geo':"lng" %>
 </div>
+<%= f.fields_for :apartment_photos do |p| %>
+     <div class="field">
+       <%= p.label :apartment_photo %><br>
+       <%= p.file_field :apartment_photo, multiple: true, name: "apartment_photos[photo][]" %>
+     </div>
+<% end %>
 <div class="actions">
     <%= f.submit %>
 </div>

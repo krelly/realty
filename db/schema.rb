@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310220247) do
+ActiveRecord::Schema.define(version: 20160317185031) do
+
+  create_table "apartment_photos", force: :cascade do |t|
+    t.string   "photo"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "apartment_id"
+  end
 
   create_table "apartments", force: :cascade do |t|
     t.text     "description"

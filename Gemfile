@@ -46,3 +46,4 @@ group :development do
 end
 
 gem 'geocoder'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
