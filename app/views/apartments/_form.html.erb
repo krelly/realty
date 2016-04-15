@@ -13,10 +13,11 @@
 </div>
 <% end %>
 
-<div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+<div id="address-details">
+    <%= f.hidden_field :latitude,'data-geo':"lat" %>
+    <%= f.hidden_field :longitude,'data-geo':"lng" %>
 </div>
+
 <div class="field">
     <%= f.label :floor %><br>
     <%= f.number_field :floor %>
@@ -37,10 +38,21 @@
     <%= f.label :address %><br>
     <%= f.text_field :address %>
 </div>
-<div id="address-details">
-    <%= f.hidden_field :latitude,'data-geo':"lat" %>
-    <%= f.hidden_field :longitude,'data-geo':"lng" %>
+
+<div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
 </div>
+
+<%= f.label :apartment_photos %><br>
+<div class="box-upload">
+    <input type="file" name="file" id="file" class="inputfile" />
+    
+    Перетащите файлы сюда или <label for="file">выберите файл</label>
+    <div class="comment">Первая фотография будет отображаться в результатах поиска</div>
+    <div class="img-preview"></div>
+</div>
+
 <%= f.fields_for :apartment_photos do |p| %>
      <div class="field">
        <%= p.label :apartment_photo %><br>

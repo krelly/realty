@@ -16,3 +16,56 @@
 #apartment_photos img{
 	height: 160px;
 }
+
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    font-family: sans-serif;
+    & + label {
+    	font-size: 1.25em;
+	    font-weight: 700;
+	    display: inline-block;
+		cursor: pointer;
+	}
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    color: cadetblue;
+}
+
+.box-upload {
+	$offset: 10px;
+    width: 500px + $offset;
+    padding: 60px 30px;
+    background-color: #c8dadf;
+    outline: 2px dashed #92b0b3;
+    outline-offset: -$offset;
+    transition-duration: .5s;
+    box-sizing: border-box;
+    &.is-dragover {
+		background-color: whitesmoke;
+	}
+
+    img {
+    	height: 110px;
+	    margin-right: 10px;
+	    &:hover {
+		    /*max-width: 115px;*/
+		    filter:brightness(70%);
+		}
+	}
+	.img-preview {
+		/*min-height: */
+	}
+	.comment {
+	    color: gray;
+	    font-size: 0.9em;
+	    font-weight: 500;
+	}
+}

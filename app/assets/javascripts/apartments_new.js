@@ -1,5 +1,21 @@
 $('#new_apartment').ready(function() {
-
+     var droppedFiles = false;
+    // el.addEventListener('')
+    $boxUpload = $('.box-upload')
+    $boxUpload.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    })
+    .on('dragover dragenter', function() {
+        $boxUpload.addClass('is-dragover');
+    })
+    .on('dragleave dragend drop', function() {
+        $boxUpload.removeClass('is-dragover');
+    })
+    .on('drop', function(e) {
+        droppedFiles = e.originalEvent.dataTransfer.files;
+        showFiles( droppedFiles,$boxUpload.find('.img-preview') );
+    });
 })
 
 var mapReady = (function() {
@@ -14,6 +30,20 @@ var mapReady = (function() {
 })();
 
 
+function showFiles(droppedFiles, $el) {
+    console.log(droppedFiles)
+    var $someDiv = $('div');
+
+    $.each(droppedFiles, function (index, file) {
+        console.log(window.URL.createObjectURL(file))
+        var img = document.createElement('img');
+        img.onload = function () {
+            window.URL.revokeObjectURL(this.src);
+        };
+        img.src = window.URL.createObjectURL(file);
+        $el.append(img);
+    });
+}
 
 
 function YmapsReady() {
