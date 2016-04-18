@@ -7,6 +7,10 @@ class ApartmentsController < ApplicationController
     @apartments = Apartment.all
   end
 
+  def map
+    @apartments = Apartment.all
+  end
+
   # GET /apartments/1
   # GET /apartments/1.json
   def show

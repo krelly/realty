@@ -1,6 +1,14 @@
 // Place all the styles related to the Apartments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.apartments.map {
+	#map {
+		width:100%;
+		height:600px;
+	}
+}
+
 .top-block {
 	display: flex;
 	address,
