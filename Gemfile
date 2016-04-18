@@ -46,3 +46,4 @@ end
 gem 'geocoder'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'pg'
+gem 'geokit-rails'

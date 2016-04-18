@@ -10,7 +10,16 @@ class ApartmentsController < ApplicationController
   def map
     @apartments = Apartment.all
   end
+  def within_box
+    @sw = Geokit::LatLng.new(*params[:sw])#55.59947660499516,36.92777694702146
+    @ne = Geokit::LatLng.new(*params[:ne])#55.832043988964585,38.22485031127929
+    @apartments = Apartment.all
+    points = Apartment.in_bounds([@sw, @ne], :origin => @somewhere).pluck(:latitude, :longitude)
 
+    respond_to do |format|
+      format.json { render json: points.as_json }
+    end
+  end
   # GET /apartments/1
   # GET /apartments/1.json
   def show

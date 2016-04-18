@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'apartments#index'
   get '/map', to: 'apartments#map'
+  # Should be accessible only by ajax ?
+  get '/within_box' => 'apartments#within_box'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -83,7 +83,7 @@ function YmapsReady() {
             zoom: 16,
             behaviors: ['default', 'scrollZoom']
         });
-         
+
         var myPlacemark = new ymaps.Placemark([lat, lng]
             /*, {
                             balloonContentBody: ui.item.label,
@@ -96,24 +96,46 @@ function YmapsReady() {
 
     if ($(".apartments.map").length) {
         myMap = new ymaps.Map("map", {
-            center:[55.76, 37.64], // Москва
-            zoom:10,
+            center: [55.76, 37.64], // Москва
+            zoom: 10,
             behaviors: ['default', 'scrollZoom']
         });
-        myMap.events.add('click', function (e) {
+        console.dir(myMap)
+        showPoints(myMap._bounds)
+        myMap.events.add('click', function(e) {
             // Географические координаты точки клика можно узнать
             // посредством вызова .get('coordPosition')
             var position = e.get('coordPosition');
             map.geoObjects.add(new ymaps.Placemark(position));
         });
-        myMap.events.add('boundschange', function (e){
-            var newBounds = e.get('newBounds')
-            console.log('BoundsChanged')
-            console.dir(newBounds)
-        })
+        myMap.events.add('boundschange', e => showPoints(e.get('newBounds')) )
     }
 }
+function showPoints(newBounds) {
 
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "/within_box",
+        data: {
+            sw: newBounds[0],
+            ne: newBounds[1]
+        },
+        success: function(points) {
+            points.forEach(point => {
+                var [lat,lng] = point
+                console.log(lat,lng);
+                var myPlacemark = new ymaps.Placemark([lat, lng]
+                    /*, {
+                                    balloonContentBody: ui.item.label,
+                                    hintContent: ui.item.label
+                                }*/
+                );
+                myMap.geoObjects.add(myPlacemark);
+            })
+        }
+    });
+}
 $(() => {
 
     ymaps.ready(mapReady);
