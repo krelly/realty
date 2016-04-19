@@ -95,23 +95,54 @@ function YmapsReady() {
     }
 
     if ($(".apartments.map").length) {
-        myMap = new ymaps.Map("map", {
-            center: [55.76, 37.64], // Москва
-            zoom: 10,
-            behaviors: ['default', 'scrollZoom']
-        });
-        console.dir(myMap)
-        showPoints(myMap._bounds)
-        myMap.events.add('click', function(e) {
-            // Географические координаты точки клика можно узнать
-            // посредством вызова .get('coordPosition')
-            var position = e.get('coordPosition');
-            map.geoObjects.add(new ymaps.Placemark(position));
-        });
-        myMap.events.add('boundschange', e => showPoints(e.get('newBounds')) )
+        var myMap,
+            defaultMapOptions = {
+              center: [55.751574, 37.573856],
+              zoom: 11,
+              behaviors: ['default', 'scrollZoom']
+            },
+            createMap = function (options) {
+                return new ymaps.Map('map', options);
+            },
+            onSuccess = function (res) {
+                var geoObject = res.geoObjects.get(0),
+                    mapOptions = geoObject && { bounds: geoObject.properties.get('boundedBy') };
+                console.dir(mapOptions)
+                if (geoObject) {
+                    console.log('point');
+
+                    console.dir(geoObject.geometry)
+                    defaultMapOptions.center = geoObject.geometry._coordinates
+                    myMap = createMap(defaultMapOptions)
+                } else {
+                    console.log('no point');
+                    myMap = createMap(mapOptions || defaultMapOptions)
+                }
+            }
+            onError = function (err) {
+                console.log(err);
+                myMap = createMap(defaultMapOptions);
+            }
+
+        ymaps.geolocation.get({ autoReverseGeocode: true })
+            .then(onSuccess,onError)
+            .then(() => {
+
+                console.dir(myMap)
+                showPoints(myMap._bounds,myMap)
+                myMap.events.add('click', function(e) {
+                  // Географические координаты точки клика можно узнать
+                  // посредством вызова .get('coordPosition')
+                  var position = e.get('coordPosition');
+                  map.geoObjects.add(new ymaps.Placemark(position));
+                });
+                myMap.events.add('boundschange', e => showPoints(e.get('newBounds')) )
+            })
+
+
     }
 }
-function showPoints(newBounds) {
+function showPoints(newBounds,myMap) {
 
     $.ajax({
         type: "GET",
