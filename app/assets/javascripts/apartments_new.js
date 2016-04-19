@@ -136,7 +136,7 @@ function YmapsReady() {
                   var position = e.get('coordPosition');
                   map.geoObjects.add(new ymaps.Placemark(position));
                 });
-                myMap.events.add('boundschange', e => showPoints(e.get('newBounds')) )
+                myMap.events.add('boundschange', e => showPoints(e.get('newBounds'), myMap) )
             })
 
 
