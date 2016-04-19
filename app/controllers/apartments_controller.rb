@@ -43,8 +43,10 @@ class ApartmentsController < ApplicationController
 
     respond_to do |format|
       if @apartment.save
-        params[:apartment_photos]['photo'].each do |a|
-          @apartment_photos = @apartment.apartment_photos.create!(photo: a, apartment_id: @apartment.id)
+        if params[:apartment_photos]
+          params[:apartment_photos]['photo'].each do |a|
+            @apartment_photos = @apartment.apartment_photos.create!(photo: a, apartment_id: @apartment.id)
+          end
         end
         format.html { redirect_to @apartment, notice: 'Apartment was successfully created.' }
         format.json { render :show, status: :created, location: @apartment }
