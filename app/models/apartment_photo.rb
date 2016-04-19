@@ -3,5 +3,5 @@ class ApartmentPhoto < ActiveRecord::Base
   #TODO removing in edit form
   #TODO simplify (remove this table and use array or ?)
   mount_uploader :photo, ImageUploader
-  belongs_to :apartment
+  belongs_to :apartment, dependent: :destroy
 end
