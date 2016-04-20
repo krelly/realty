@@ -48,3 +48,4 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'pg'
 gem 'geokit-rails'
 gem 'will_paginate', '~> 3.0.6'
+gem "autoprefixer-rails"
