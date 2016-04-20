@@ -12,8 +12,9 @@ namespace :db do
       floor = 1+rand(10)
       price = 1+rand(1000)
       rooms = 1+rand(10)
-      latitude = Faker::Address.latitude
-      longitude = Faker::Address.longitude
+      # Generate ranom position aroung Kyiv
+      latitude = rand(50.2534..50.7020)# Faker::Address.latitude
+      longitude = rand(29.7070..31.2891)#Faker::Address.longitude
       Apartment.create!(floor: floor,
                       price:price,
                       rooms:rooms,
