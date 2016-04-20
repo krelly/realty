@@ -1,6 +1,6 @@
 class ApartmentsController < ApplicationController
   before_action :set_apartment, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :verify_authenticity_token, only:[:within_box]
   # GET /apartments
   # GET /apartments.json
   def index
@@ -11,13 +11,21 @@ class ApartmentsController < ApplicationController
     @apartments = Apartment.all
   end
   def within_box
-    @sw = Geokit::LatLng.new(*params[:sw])#55.59947660499516,36.92777694702146
-    @ne = Geokit::LatLng.new(*params[:ne])#55.832043988964585,38.22485031127929
+    sw_lat, sw_lon, ne_lat, ne_lon = params[:bounds].split(',')
+    @sw = Geokit::LatLng.new(sw_lat,sw_lon)#55.59947660499516,36.92777694702146
+    @ne = Geokit::LatLng.new(ne_lat,ne_lon)#55.832043988964585,38.22485031127929
     @apartments = Apartment.all
-    points = Apartment.in_bounds([@sw, @ne], :origin => @somewhere).pluck(:latitude, :longitude)
+    points = Apartment.in_bounds([@sw, @ne], :origin => @somewhere).pluck(:id, :latitude, :longitude)
 
+    markers = points.map do |point|
+      {
+        id: point[0],
+        geometry: {type: "Point", coordinates: point[1,2]},
+        properties: {"balloonContent": "Содержимое балуна"}
+      }
+    end
     respond_to do |format|
-      format.json { render json: points.as_json }
+      format.json { render json: markers.as_json, :callback => params[:callback] }
     end
   end
   # GET /apartments/1
