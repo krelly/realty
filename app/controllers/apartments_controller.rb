@@ -82,7 +82,6 @@ class ApartmentsController < ApplicationController
   # DELETE /apartments/1
   # DELETE /apartments/1.json
   def destroy
-    @apartment.apartment_photos.delete_all
     @apartment.destroy
     respond_to do |format|
       format.html { redirect_to apartments_url, notice: 'Apartment was successfully destroyed.' }
