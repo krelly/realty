@@ -2,6 +2,29 @@
 <%= render "type_selector" %>
 <h1>Listing Apartments</h1>
 
+
+<div class="apartment-list">
+  <% @apartments.each do |apartment| %>
+  <div class="item">
+    <div class="photos">
+      <% if apartment.apartment_photos.first %>
+        <%= image_tag apartment.apartment_photos.first.photo_url %>
+      <% end %>
+    </div>
+    <div class="info">
+      <div class="apartment-title">
+        2-x комнатная квартира <%= apartment.address %>
+      </div>
+      <div class="description">
+        <%= apartment.description %>
+      </div>
+      <div class="price"><%= apartment.price %></div>
+    </div>
+  </div>
+  <% end %>
+
+</div>
+
 <table>
   <thead>
     <tr>

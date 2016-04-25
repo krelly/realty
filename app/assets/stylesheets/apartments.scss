@@ -30,7 +30,8 @@ input[type="number"] {
 }
 
 
-.inputfile {
+.inputfile {.apartment-list {}
+
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
@@ -79,5 +80,28 @@ input[type="number"] {
 	    color: gray;
 	    font-size: 0.9em;
 	    font-weight: 500;
+	}
+}
+.apartment-list {
+	.item {
+		display: flex;
+	}
+	.price {
+		text-align: end;
+	}
+	.apartment-title {
+		color: #212121;
+		font-size: 2em;
+		padding: 10px 0 23px;
+		// line-height: 1.5;
+	}
+	.info {
+		padding: 5px 30px 10px 20px;
+	}
+	.photos {
+		img {
+			height: 300px;
+
+		}
 	}
 }
