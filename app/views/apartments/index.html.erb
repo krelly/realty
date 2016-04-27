@@ -6,7 +6,7 @@
 <div class="apartment-list">
   <% @apartments.each do |apartment| %>
   <div class="item">
-    <div class="photos">
+    <div class="photo">
       <% if apartment.apartment_photos.first %>
         <%= image_tag apartment.apartment_photos.first.photo_url %>
       <% end %>
