@@ -8,12 +8,18 @@
   <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 </head>
 <body class="<%= controller_name %> <%= action_name %>" data-no-turbolink="true" >
+<div class="user-nav">
+  <% if current_user %>
+  Signed in as <%= current_user.name %> | <%= link_to "Logout", logout_path %>
+  <% else %>
+  <%= link_to 'Login', login_path %> | <%= link_to 'Signup', signup_path %>
+  <% end %>
 
-<% if current_user %>
-  Signed in as <%= current_user.name %> | <%= link_to "Logout", '/logout' %>
-<% else %>
-  <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
-<% end %>  
+</div>
+
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
 
 <%= yield %>
 

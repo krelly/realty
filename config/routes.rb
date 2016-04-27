@@ -5,16 +5,18 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'apartments#index'
-  get '/map', to: 'apartments#map'
+  get 'map', to: 'apartments#map'
   # Should be accessible only by ajax ?
-  get '/within_box' => 'apartments#within_box'
+  get 'within_box' => 'apartments#within_box'
   # these routes are for showing users a login form, logging them in, and logging them out.
-  get '/login' => 'sessions#new'
-  post '/login' => 'sessions#create'
-  get '/logout' => 'sessions#destroy'
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  get 'logout' => 'sessions#destroy'
 
-  get '/signup' => 'users#new'
-  post '/users' => 'users#create'
+  get 'signup' => 'users#new'
+  post 'users' => 'users#create'
+
+  resources :users
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
   # Example of named route that can be invoked with purchase_url(id: product.id)

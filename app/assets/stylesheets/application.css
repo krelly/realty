@@ -17,3 +17,7 @@
 textarea {
 	width: 500px;
 }
+
+.alert-error {
+	color: red;
+}
