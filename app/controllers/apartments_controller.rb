@@ -31,17 +31,18 @@ class ApartmentsController < ApplicationController
   # GET /apartments/1
   # GET /apartments/1.json
   def show
-    @apartment_photos = @apartment.apartment_photos.all
+    @apartment_photos = @apartment.apartment_photos
   end
 
   # GET /apartments/new
   def new
     @apartment = Apartment.new
-    @apartment_photos = @apartment.apartment_photos.build
+    @apartment.apartment_photos.build
   end
 
   # GET /apartments/1/edit
   def edit
+     @apartment.apartment_photos.build
   end
 
   # POST /apartments
@@ -97,6 +98,7 @@ class ApartmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def apartment_params
-      params.require(:apartment).permit(:description, :floor, :price, :rooms, :area, :address, {photos:[]})
+      params.require(:apartment).permit(:description, :floor, :price, :rooms, :area, :address, :latitude, :longitude,
+                                                                                    apartment_photos_attributes: [:id,:name, :_destroy, :photo], photos:[:id] )
     end
 end
