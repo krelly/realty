@@ -50,20 +50,22 @@
 
     Перетащите файлы сюда или <label for="apartment-image">выберите файл</label>
     <div class="comment">Первая фотография будет отображаться в результатах поиска</div>
-    <div class="img-preview"></div>
+    <div class="img-preview">
+      <% if current_page?(action: 'edit') %>
+        <%= f.fields_for :apartment_photos do |photo| %>
+        <div class="preview">
+            <% if photo.object.new_record? %>
+              <%= photo.file_field :photo %>
+            <% else %>
+              <%= image_tag(photo.object.photo_url) %>
+              <%= photo.check_box :_destroy %>
+            <% end %>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
 </div>
 
-
-
-<%= f.fields_for :apartment_photos do |photo| %>
-    <% if photo.object.new_record? %>
-      <%= photo.file_field :photo %>
-    <% else %>
-      <%= image_tag(photo.object.photo_url) %>
-      <%= photo.check_box :_destroy %>
-      <!-- .object.image.url(:thumb) -->
-    <% end %>
-<% end %>
 
 <div class="ymap" data-address="Москва, Кремль">
 
