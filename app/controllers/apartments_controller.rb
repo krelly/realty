@@ -4,12 +4,13 @@ class ApartmentsController < ApplicationController
   # GET /apartments
   # GET /apartments.json
   def index
-    @apartments = Apartment.paginate(:page => params[:page])
+    @apartments = Apartment.paginate(:page => params[:page]).includes(:apartment_photos)
   end
 
   def map
     @apartments = Apartment.all
   end
+
   def within_box
     sw_lat, sw_lon, ne_lat, ne_lon = params[:bounds].split(',')
     @sw = Geokit::LatLng.new(sw_lat,sw_lon)#55.59947660499516,36.92777694702146
