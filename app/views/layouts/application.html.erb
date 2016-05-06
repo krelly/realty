@@ -21,7 +21,7 @@
   </div>
   <div class="nav navbar-nav pull-xs-right">
 
-    <%= link_to 'New Apartment', new_apartment_path, class: "nav-item btn btn-primary-outline" %>
+    <%= link_to_unless_current('New Apartment', new_apartment_path, class: "nav-item btn btn-primary-outline") {} %>
     <div class="user-nav nav-item pull-xs-right">
       <% if current_user %>
       Signed in as <%= current_user.name %>|<%= link_to "Logout", logout_path %>
