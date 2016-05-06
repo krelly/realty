@@ -43,7 +43,7 @@ class ApartmentsController < ApplicationController
 
   # GET /apartments/1/edit
   def edit
-     @apartment.apartment_photos.build
+    @apartment.apartment_photos.build
   end
 
   # POST /apartments
@@ -72,6 +72,15 @@ class ApartmentsController < ApplicationController
   def update
     respond_to do |format|
       if @apartment.update(apartment_params)
+        if params[:apartment_photos]
+          params[:apartment_photos]['photo'].each do |a|
+            @apartment_photos = @apartment.apartment_photos.create!(photo: a, apartment_id: @apartment.id)
+          end
+        end
+        # if params[:apartment_photos]
+        #   puts
+        #   # @apartment.apartment_photos.update(apartment_photos_params)
+        # end
         format.html { redirect_to @apartment, notice: 'Apartment was successfully updated.' }
         format.json { render :show, status: :ok, location: @apartment }
       else

@@ -51,11 +51,10 @@
     Перетащите файлы сюда или <label for="apartment-image">выберите файл</label>
     <div class="comment">Первая фотография будет отображаться в результатах поиска</div>
     <div class="img-preview">
-    <% if @apartment.persisted? %>
       <%= f.fields_for :apartment_photos do |photo| %>
         <% if photo.object.new_record? %>
         <div class="upload">
-          <%= photo.file_field :photo%>
+          <%= photo.file_field :photo, :multiple => true, name: "apartment_photos[photo][]" %>
         </div>
         <% else %>
         <div class="preview">
@@ -64,7 +63,7 @@
         </div>
         <% end %>
       <% end %>
-    <% end %>
+
     </div>
 </div>
 
