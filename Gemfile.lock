@@ -51,6 +51,9 @@ GEM
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap (4.0.0.alpha3)
+      autoprefixer-rails (>= 6.0.3)
+      sass (>= 3.4.19)
     builder (3.2.2)
     byebug (8.2.5)
     coffee-rails (4.1.1)
@@ -91,7 +94,7 @@ GEM
     mime-types-data (3.2016.0221)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
-    multi_json (1.11.3)
+    multi_json (1.12.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     pg (0.18.4)
@@ -165,6 +168,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bcrypt (~> 3.1.7)
+  bootstrap (~> 4.0.0.alpha3)
   byebug
   carrierwave!
   coffee-rails (~> 4.1.0)

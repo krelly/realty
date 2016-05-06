@@ -51,18 +51,20 @@
     Перетащите файлы сюда или <label for="apartment-image">выберите файл</label>
     <div class="comment">Первая фотография будет отображаться в результатах поиска</div>
     <div class="img-preview">
-      <% if current_page?(action: 'edit') %>
-        <%= f.fields_for :apartment_photos do |photo| %>
+    <% if @apartment.persisted? %>
+      <%= f.fields_for :apartment_photos do |photo| %>
+        <% if photo.object.new_record? %>
+        <div class="upload">
+          <%= photo.file_field :photo%>
+        </div>
+        <% else %>
         <div class="preview">
-            <% if photo.object.new_record? %>
-              <%= photo.file_field :photo %>
-            <% else %>
-              <%= image_tag(photo.object.photo_url) %>
-              <%= photo.check_box :_destroy %>
-            <% end %>
+          <%= image_tag(photo.object.photo_url) %>
+          <%= photo.check_box :_destroy %>
         </div>
         <% end %>
       <% end %>
+    <% end %>
     </div>
 </div>
 

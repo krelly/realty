@@ -10,14 +10,35 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
  *= require_self
+ *= require apartments
  */
 
+@import "bootstrap";
+
 textarea {
-	width: 500px;
+    width: 500px;
+}
+.alert-error {
+    color: red;
+}
+.user-nav {
+    padding-top: .425rem;
+    padding-bottom: .425rem;
 }
 
-.alert-error {
-	color: red;
+$navbar-height: 37.594px;
+
+.navbar-logo {
+    padding: 0 !important;
+    margin-right: 0;
+    height: $navbar-height;
+    & > img {
+        height: 100%;
+        padding: 0;
+    }
+}
+
+#content {
+    margin: 4px 12px;
 }

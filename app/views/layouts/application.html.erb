@@ -8,20 +8,38 @@
   <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 </head>
 <body class="<%= controller_name %> <%= action_name %>" data-no-turbolink="true" >
-<div class="user-nav">
-  <% if current_user %>
-  Signed in as <%= current_user.name %> | <%= link_to "Logout", logout_path %>
-  <% else %>
-  <%= link_to 'Login', login_path %> | <%= link_to 'Signup', signup_path %>
-  <% end %>
 
-</div>
+<nav class="navbar navbar-default navbar-light bg-faded">
+
+    <%= link_to(root_path, class:"navbar-brand navbar-logo") do %>
+    <%= image_tag 'logo.png', id: "logo", class: "img-responsive" %>
+    <% end %>
+
+  <div class="nav navbar-nav">
+    <a class="nav-item nav-link active" href="#">Аренда<span class="sr-only">(current)</span></a>
+    <a class="nav-item nav-link" href="#">Продажа</a>
+  </div>
+  <div class="nav navbar-nav pull-xs-right">
+
+    <%= link_to 'New Apartment', new_apartment_path, class: "nav-item btn btn-primary-outline" %>
+    <div class="user-nav nav-item pull-xs-right">
+      <% if current_user %>
+      Signed in as <%= current_user.name %>|<%= link_to "Logout", logout_path %>
+      <% else %>
+      <%= link_to 'Login', login_path %> | <%= link_to 'Signup', signup_path %>
+      <% end %>
+    </div>
+  </div>
+</nav>
+
 
 <% flash.each do |key, value| %>
   <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
+<div id="content">
+  <%= yield %>
 
-<%= yield %>
+</div>
 
 </body>
 </html>

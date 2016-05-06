@@ -1,9 +1,8 @@
 <!-- <p id="notice"><%= notice %></p> -->
-<%= render "type_selector" %>
-<h1>Listing Apartments</h1>
 
 
 <div class="apartment-list">
+  <%= render "type_selector" %>
   <% @apartments.each do |apartment| %>
   <div class="item">
     <div class="photo">
@@ -13,7 +12,14 @@
     </div>
     <div class="info">
       <div class="apartment-title">
-        2-x комнатная квартира <%= apartment.address %>
+        <%= link_to(apartment) do %>
+          2-x комнатная квартира <%= apartment.address %>
+        <% end %>
+      </div>
+      <div class="controls">
+
+        <%= link_to 'Edit', edit_apartment_path(apartment) %>
+        <%= link_to 'Destroy', apartment, method: :delete, data: { confirm: 'Are you sure?' } %>
       </div>
       <div class="description">
         <%= apartment.description %>
@@ -25,35 +31,7 @@
 
 </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Floor</th>
-      <th>Price</th>
-      <th>Rooms</th>
-      <th>Area</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @apartments.each do |apartment| %>
-      <tr>
-        <td><%= apartment.description %></td>
-        <td><%= apartment.floor %></td>
-        <td><%= apartment.price %></td>
-        <td><%= apartment.rooms %></td>
-        <td><%= apartment.area %></td>
-        <td><%= link_to 'Show', apartment %></td>
-        <td><%= link_to 'Edit', edit_apartment_path(apartment) %></td>
-        <td><%= link_to 'Destroy', apartment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
 <br>
 
-<%= link_to 'New Apartment', new_apartment_path %>
+
 <%= will_paginate @posts %>

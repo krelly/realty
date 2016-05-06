@@ -1,6 +1,8 @@
 // Place all the styles related to the Apartments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+
 .apartments.map {
     #map {
         width: 100%;
@@ -25,6 +27,7 @@
 input[type="number"] {
     width: 60px;
 }
+
 .inputfile {
     .apartment-list {}
     width: 0.1px;
@@ -48,7 +51,7 @@ input[type="number"] {
 .box-upload {
     $offset: 10px;
     width: 500px + $offset;
-    padding: 60px 30px;
+    padding: 25px 30px;
     background-color: #c8dadf;
     outline: 2px dashed #92b0b3;
     outline-offset: -$offset;
@@ -72,6 +75,9 @@ input[type="number"] {
         color: gray;
         font-size: 0.9em;
         font-weight: 500;
+    }
+    .upload {
+        margin: 15px 0;
     }
 }
 .apartment-list {
@@ -124,4 +130,9 @@ input[type="number"] {
     &:hover {
         background-image: image-url("bin-red.svg");
     }
+}
+
+.type-selector {
+    display: flex;
+    justify-content: center;
 }

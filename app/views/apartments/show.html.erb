@@ -3,7 +3,7 @@
 <% if @apartment.updated_at > @apartment.created_at %>
   Изменено: <%= time_ago_in_words(@apartment.updated_at) %> назад
 <% end %>
-<br>
+
 Размещено: <%= time_ago_in_words(@apartment.created_at)%> назад
 
 
