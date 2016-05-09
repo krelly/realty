@@ -1,46 +1,56 @@
-<p id="notice"><%= notice %></p>
 
-<% if @apartment.updated_at > @apartment.created_at %>
-  Изменено: <%= time_ago_in_words(@apartment.updated_at) %> назад
-<% end %>
-
-Размещено: <%= time_ago_in_words(@apartment.created_at)%> назад
+<div class="info-left">
+  <address class="">
+    <%= @apartment.address %>
+  </address>
 
 
+  <div class="price-block">
+    <div class="total"><%= @apartment.price %> руб.</div>
+    <div class="per-sq">200 00 руб за м<sup>2</sup></div>
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @apartment.description %>
-</p>
+  <p>
+    <strong>Floor:</strong>
+    <%= @apartment.floor %>
+  </p>
 
-<p>
-  <strong>Floor:</strong>
-  <%= @apartment.floor %>
-</p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @apartment.price %>
-</p>
+  <p>
+    <strong>Rooms:</strong>
+    <%= @apartment.rooms %>
+  </p>
 
-<p>
-  <strong>Rooms:</strong>
-  <%= @apartment.rooms %>
-</p>
+  <p>
+    <strong>Area:</strong>
+    <%= @apartment.area %>
+  </p>
 
-<p>
-  <strong>Area:</strong>
-  <%= @apartment.area %>
-</p>
-<p>
-  <strong>Address:</strong>
-  <%= @apartment.address %>
-</p>
-<div id="apartment_photos">
-    <% @apartment_photos.each do |p| %>
-        <%= image_tag p.photo %>
-    <% end %>
+  <p>
+    <strong>Description:</strong>
+    <%= @apartment.description %>
+  </p>
 </div>
+
+<div class="info-right">
+  <div class="date-added">
+    Размещено: <%= time_ago_in_words(@apartment.created_at)%> назад
+  </div>
+  <div class="date-updated">
+    <% if @apartment.updated_at > @apartment.created_at %>
+    Изменено: <%= time_ago_in_words(@apartment.updated_at) %> назад
+    <% end %>
+  </div>
+  <div id="apartment_photos">
+      <% @apartment_photos.each do |p| %>
+          <%= image_tag p.photo %>
+      <% end %>
+  </div>
+</div>
+
+
+
+
 
 <%= content_tag("div",nil,id:'interactive-map', data: {latitude: @apartment.latitude, longitude: @apartment.longitude}) %>
 

@@ -2,28 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bootstrap";
-
-.apartments.map {
-    #map {
-        width: 100%;
-        height: 600px;
-    }
-}
-.top-block {
-    display: flex;
-    &.offer-posted,
-    &.price,
-    address {
-        flex: 1;
-    }
-}
-#interactive-map {
-    height: 600px;
-    width: 600px;
-}
-#apartment_photos img {
-    height: 160px;
-}
 input[type="number"] {
     width: 60px;
 }
@@ -135,4 +113,66 @@ input[type="number"] {
 .type-selector {
     display: flex;
     justify-content: center;
+}
+
+
+//apartments on map
+.apartments.map {
+    #map {
+        width: 100%;
+        height: 600px;
+    }
+}
+
+
+/*show action*/
+.apartments.show {
+    #content {
+        display: flex;
+        flex-flow: row wrap;
+    }
+    .info-left, .info-right {
+        flex:1 50%;
+    }
+    .info-left {
+        padding-right: 20px;
+    }
+    .info-right {
+        padding-left: 20px;
+    }
+    address {
+        font-size: 1.5em;
+        font-weight: bolder;
+    }
+    .price-block {
+        .total {
+            font-size: 1.3em;
+            font-weight:bolder;
+        }
+        .per-sq {
+            font-size: 0.9em
+        }
+    }
+    .date-added, .date-updated {
+        color: #808080;
+        margin-left: auto;
+        text-align: end;
+    }
+}
+#interactive-map {
+    height: 600px;
+    width: 600px;
+    flex: 100%
+}
+#apartment_photos img {
+    height: 160px;
+}
+
+.top-block {
+    display: flex;
+    &.offer-posted,
+    &.price,
+    address {
+        flex: 1;
+    }
 }

@@ -40,5 +40,12 @@ $navbar-height: 37.594px;
 }
 
 #content {
-    margin: 4px 12px;
+    margin: 4px 20px;
+}
+
+.alert-notice {
+    @extend .alert-success;
+}
+.alert-alert {
+    @extend .alert-warning;
 }
