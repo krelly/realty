@@ -11,17 +11,18 @@
  * file per style scope.
  *
  *= require_self
- *= require apartments
+ *= require_tree .
  */
 
 @import "bootstrap";
 
+input,select,textarea {
+  @extend .form-control;
+}
 textarea {
     width: 500px;
 }
-.alert-error {
-    color: red;
-}
+
 .user-nav {
     padding-top: .425rem;
     padding-bottom: .425rem;
@@ -48,4 +49,15 @@ $navbar-height: 37.594px;
 }
 .alert-alert {
     @extend .alert-warning;
+}
+.alert-error {
+  @extend .alert-danger;
+}
+
+.sessions.new, .users.new {
+  #content {
+    width: 500px;
+    margin: 40px auto 0px;
+    margin-top: 40px;
+  }
 }

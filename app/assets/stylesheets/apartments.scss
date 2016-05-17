@@ -5,6 +5,15 @@
 input[type="number"] {
     width: 60px;
 }
+.new-apartment-form {
+  width: 600px;
+  label {
+    @extend .form-control-label;
+  }
+  textarea {
+    width: 400px;
+  }
+}
 
 .inputfile {
     .apartment-list {}
@@ -123,6 +132,7 @@ input[type="number"] {
         height: 600px;
     }
 }
+
 
 
 /*show action*/

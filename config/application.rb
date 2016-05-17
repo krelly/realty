@@ -22,5 +22,7 @@ module Realty
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    # Do not generate scaffold css when creating with rails -g scaffold
+    config.generators.stylesheets = false
   end
 end

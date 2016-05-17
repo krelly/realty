@@ -18,33 +18,58 @@
     <%= f.hidden_field :longitude,'data-geo':"lng" %>
 </div>
 
-<div class="field">
-    <%= f.label :floor %><br>
-    <%= f.number_field :floor %>
+
+
+<div class="form-group row">
+  <%= f.label :floor,class:"col-sm-2 " %>
+
+  <div class="col-sm-10 input-group ">
+    <%= f.number_field :floor, class:"form-control" %>
+    <span class="input-group-addon">Этажность</span>
+    <%= f.number_field :total_floors, class:"form-control" %>
+  </div>
 </div>
-<div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
+<div class="form-group row">
+    <%= f.label :price, class: "col-sm-2" %>
+    <div class="col-sm-10 input-group">
+      <%= f.text_field :price, class:"form-control" %>
+      <span class="input-group-addon">$</span>
+    </div>
 </div>
-<div class="field">
-    <%= f.label :rooms %><br>
-    <%= f.number_field :rooms %>
+<div class="form-group row">
+    <%= f.label :rooms, class: "col-sm-2" %>
+    <div class="col-sm-10">
+      <%= f.number_field :rooms, class:"form-control" %>
+    </div>
 </div>
-<div class="field">
-    <%= f.label :area %><br>
-    <%= f.text_field :area %>
+<div class="form-group row">
+    <%= f.label :area, class: "col-sm-2" %>
+    <div class="col-sm-10 input-group">
+      <%= f.text_field :area, class:"form-control" %>
+      <span class="input-group-addon">м²</span>
+    </div>
 </div>
-<div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
+<div class="form-group row">
+    <%= f.label :living_area, class: "col-sm-2" %>
+    <div class="col-sm-10 input-group">
+      <%= f.text_field :living_area, class:"form-control" %>
+      <span class="input-group-addon">м²</span>
+    </div>
+</div>
+<div class="form-group row">
+    <%= f.label :address, class: "col-sm-2" %>
+    <div class="col-sm-10">
+      <%= f.text_field :address, class:"form-control" %>
+    </div>
 </div>
 
-<div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+<div class="form-group row">
+    <%= f.label :description, class: "col-sm-2" %>
+    <div class="col-sm-10">
+      <%= f.text_area :description, class:"form-control" %>
+    </div>
 </div>
 
-<%= f.label :apartment_photos %><br>
 <div class="box-upload">
     <input type="file" name="file" id="apartment-image" class="inputfile" accept="image/*" multiple >
 
@@ -72,7 +97,7 @@
 
 </div>
 <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary"%>
 </div>
 
 
