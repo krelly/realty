@@ -9,7 +9,7 @@ class Ability
       can [:update, :destroy], Apartment, :user_id => user.id
     end
 
-    #TODO proper roles for users
+    #TODO proper roles for user
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

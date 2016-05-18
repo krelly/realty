@@ -1,7 +1,7 @@
 class ApartmentsController < ApplicationController
   before_action :set_apartment, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token, only:[:within_box]
-  load_and_authorize_resource
+  load_and_authorize_resource :only => [:index, :show, :create, :update]
   # GET /apartments
   # GET /apartments.json
   def index
