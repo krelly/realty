@@ -5,7 +5,14 @@ class ApartmentsController < ApplicationController
   # GET /apartments
   # GET /apartments.json
   def index
-    @apartments = Apartment.paginate(:page => params[:page]).includes(:apartment_photos)
+    if params[:type] == "rent"
+      @apartments = Apartment.rent
+    elsif params[:type] == "buy"
+      @apartments = Apartment.buy
+    else
+      @apartments = Apartment.all
+    end
+    @apartments = @apartments.paginate(page: params[:page]).includes(:apartment_photos).order('created_at DESC')
   end
 
   def map
@@ -110,7 +117,9 @@ class ApartmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def apartment_params
-      params.require(:apartment).permit(:description, :floor, :price, :rooms, :area, :address, :latitude, :longitude,
-                                                                                    apartment_photos_attributes: [:id,:name, :_destroy, :photo], photos:[:id] )
+      params.require(:apartment).permit(:description, :floor, :price, :rooms,
+                                              :area, :address, :latitude,
+                                              :longitude, :apartment_type,
+                                              apartment_photos_attributes: [:id,:name, :_destroy, :photo], photos:[:id] )
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518114816) do
+ActiveRecord::Schema.define(version: 20160518134326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,20 +23,26 @@ ActiveRecord::Schema.define(version: 20160518114816) do
     t.integer  "apartment_id"
   end
 
+  create_table "apartment_types", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "apartments", force: :cascade do |t|
     t.text     "description"
     t.integer  "floor"
-    t.decimal  "price",        precision: 8, scale: 2
+    t.decimal  "price",          precision: 8, scale: 2
     t.integer  "rooms"
-    t.decimal  "area",         precision: 7, scale: 2
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.decimal  "area",           precision: 7, scale: 2
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
     t.integer  "total_floors"
-    t.decimal  "living_area",  precision: 8, scale: 2
+    t.decimal  "living_area",    precision: 8, scale: 2
     t.integer  "user_id"
+    t.integer  "apartment_type"
   end
 
   add_index "apartments", ["latitude", "longitude"], name: "index_apartments_on_latitude_and_longitude", using: :btree

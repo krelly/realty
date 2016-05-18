@@ -16,8 +16,9 @@
     <% end %>
 
   <div class="nav navbar-nav">
-    <a class="nav-item nav-link active" href="#">Аренда<span class="sr-only">(current)</span></a>
-    <a class="nav-item nav-link" href="#">Продажа</a>
+    <%= link_to 'Аренда', params.merge({:type => "rent"}), class: "nav-item nav-link" %>
+    <%= link_to 'Продажа', params.merge({:type => "buy"}), class: "nav-item nav-link" %>
+
   </div>
   <div class="nav navbar-nav pull-xs-right">
     <% if can? :create, Apartment %>
