@@ -54,3 +54,5 @@ gem 'pg'
 gem 'geokit-rails'
 gem 'will_paginate', '~> 3.0.6'
 gem "autoprefixer-rails"
+# Manage abilities
+gem 'cancancan', '~> 1.10'

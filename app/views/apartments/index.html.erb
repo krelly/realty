@@ -17,9 +17,12 @@
         <% end %>
       </div>
       <div class="controls">
-
-        <%= link_to 'Edit', edit_apartment_path(apartment) %>
-        <%= link_to 'Destroy', apartment, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% if can? :edit, apartment %>
+          <%= link_to 'Edit', edit_apartment_path(apartment) %>
+        <% end %>
+        <% if can? :destroy, apartment %>
+          <%= link_to 'Destroy', apartment, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
       </div>
       <div class="description">
         <%= apartment.description %>
