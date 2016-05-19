@@ -16,8 +16,8 @@
     <% end %>
 
   <div class="nav navbar-nav">
-    <%= link_to 'Аренда', params.merge({:type => "rent"}), class: "nav-item nav-link" %>
-    <%= link_to 'Продажа', params.merge({:type => "buy"}), class: "nav-item nav-link" %>
+    <%= link_to 'Аренда', root_path({:type => "rent"}), class: "nav-item nav-link" %>
+    <%= link_to 'Продажа', root_path({:type => "buy"}), class: "nav-item nav-link" %>
 
   </div>
   <div class="nav navbar-nav pull-xs-right">
