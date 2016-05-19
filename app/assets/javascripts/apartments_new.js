@@ -99,7 +99,7 @@ function YmapsReady() {
         var myMap,
             defaultMapOptions = {
                 center: [55.751574, 37.573856],
-                zoom: 11,
+                zoom: 12,
                 behaviors: ['default', 'scrollZoom']
             },
             createMap = function(options) {
@@ -111,11 +111,9 @@ function YmapsReady() {
                         bounds: geoObject.properties.get('boundedBy')
                     };
                 if (geoObject) {
-                    console.log('point');
                     defaultMapOptions.center = geoObject.geometry._coordinates
                     myMap = createMap(defaultMapOptions)
                 } else {
-                    console.log('no point');
                     myMap = createMap(mapOptions)
                 }
             }
@@ -129,30 +127,70 @@ function YmapsReady() {
             })
             .then(onSuccess, onError)
             .then(() => {
+                var customBalloonContentLayout = ymaps.templateLayoutFactory.createClass(
+                // Выводим в цикле список всех геообъектов.
+                  `<ul class=list>
+                  {% for geoObject in properties.geoObjects %}
+                      <li><a href=# data-placemarkid="{{ geoObject.properties.placemarkId }}" class="list_item">{{ geoObject.properties.balloonContentHeader|raw }}</a></li>
+                  {% endfor %}
+                  </ul>`);
                 objectManager = new ymaps.LoadingObjectManager('/within_box?bounds=%b', {
                     // Чтобы метки начали кластеризоваться, выставляем опцию.
                     clusterize: true,
                     // ObjectManager принимает те же опции, что и кластеризатор.
-                    gridSize: 64
+                    gridSize: 64,
+                    clusterDisableClickZoom: true,
+                    clusterOpenBalloonOnClick: true,
+                    // Устанавливаем режим открытия балуна.
+                    // В данном примере балун никогда не будет открываться в режиме панели.
+                    clusterBalloonPanelMaxMapArea: 0,
+                    // По умолчанию опции балуна balloonMaxWidth и balloonMaxHeight не установлены для кластеризатора,
+                    // так как все стандартные макеты имеют определенные размеры.
+                    clusterBalloonMaxHeight: 200,
+                    // Устанавливаем собственный макет контента балуна.
+                    clusterBalloonContentLayout: customBalloonContentLayout
                 });
 
                 // Чтобы задать опции одиночным объектам и кластерам,
                 // обратимся к дочерним коллекциям ObjectManager.
                 objectManager.objects.options.set('preset', 'islands#greenDotIcon');
                 objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
-                myMap.geoObjects.add(objectManager);
+                objectManager.objects.events.add('click', function (e) {
+                    var objectId = e.get('objectId');
+                    loadBalloonData(objectId).then(function (data) {
 
-
-                // showPoints(myMap._bounds, myMap)
-                myMap.events.add('click', function(e) {
-                    // Географические координаты точки клика можно узнать
-                    // посредством вызова .get('coordPosition')
-                    var position = e.get('coordPosition');
-                    map.geoObjects.add(new ymaps.Placemark(position));
+                        var obj = objectManager.objects.getById(objectId);
+                        console.dir(data)
+                        obj.properties.balloonContent = `
+                        <div class="apartment-card">
+                            <div class="photo"><img src="${data.photo}"></div>
+                            <a href="/apartments/${data.id}">
+                                <div class="title">Квартира, ${data.rooms} ${pluralize(data.rooms,'комната','комнаты','комнат')}, этаж ${data.floor}/${data.total_floors}</div>
+                            </a>
+                            <div class="description">${data.address}</div>
+                            <div class="price">${data.price}$</div>
+                        </div>
+                        `;
+                        objectManager.objects.balloon.open(objectId);
+                        // loadBalloonData(objectId).then(function (data) {
+                        //
+                        // });
+                        // if (hasBalloonData(objectId)) {
+                        //     objectManager.objects.balloon.open(objectId);
+                        // } else {
+                        //
+                        // }
+                    })
                 });
-                // myMap.events.add('boundschange', e => showPoints(e.get('newBounds'), myMap))
+                myMap.geoObjects.add(objectManager);
             })
     }
+}
+function loadBalloonData(id) {
+    return fetch(`apartments/${id}.json`).then(res => res.json())
+    // return new Promise(function (resolve,reject) {
+    //     resolve
+    // })
 }
 
 function showPoints(newBounds, myMap) {

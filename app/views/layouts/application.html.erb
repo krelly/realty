@@ -12,7 +12,7 @@
 <nav class="navbar navbar-default navbar-light bg-faded">
 
     <%= link_to(root_path, class:"navbar-brand navbar-logo") do %>
-    <%= image_tag 'logo.png', id: "logo", class: "img-responsive" %>
+      <%= image_tag 'logo.png', id: "logo", class: "img-responsive" %>
     <% end %>
 
   <div class="nav navbar-nav">
@@ -26,7 +26,7 @@
     <% end %>
     <div class="user-nav nav-item pull-xs-right">
       <% if current_user %>
-      Signed in as <%= current_user.name %>|<%= link_to "Logout", logout_path %>
+      Signed in as <%= current_user.name %> | <%= link_to "Logout", logout_path %>
       <% else %>
       <%= link_to 'Login', login_path %> | <%= link_to 'Signup', signup_path %>
       <% end %>
@@ -40,7 +40,6 @@
 <% end %>
 <div id="content">
   <%= yield %>
-
 </div>
 
 </body>

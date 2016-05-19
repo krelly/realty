@@ -41,6 +41,10 @@ class ApartmentsController < ApplicationController
   # GET /apartments/1.json
   def show
     @apartment_photos = @apartment.apartment_photos
+    respond_to do |format|
+      format.html
+      format.json { render :json => @apartment.attributes.merge( {photo: @apartment_photos.first.photo_url} ) }
+    end
   end
 
   # GET /apartments/new
@@ -117,8 +121,8 @@ class ApartmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def apartment_params
-      params.require(:apartment).permit(:description, :floor, :price, :rooms,
-                                              :area, :address, :latitude,
+      params.require(:apartment).permit(:description, :floor, :total_floors, :price, :rooms,
+                                              :area,:living_area, :address, :latitude,
                                               :longitude, :apartment_type,
                                               apartment_photos_attributes: [:id,:name, :_destroy, :photo], photos:[:id] )
     end
