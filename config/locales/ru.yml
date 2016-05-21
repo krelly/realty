@@ -1,5 +1,14 @@
 ---
-en:
+ru:
+  types:
+    buy: "Продажа"
+    rent: "Сдача в аренду"
+  links:
+    show: "Показать"
+    back: "Назад"
+    edit: "Редактировать"
+    "New Apartment": "Новое обьявление"
+  floor: "этаж"
   activerecord:
     attributes:
       apartment:
@@ -13,10 +22,11 @@ en:
         living_area: "Жилая площадь"
         longitude: "долгота"
         price: "Цена"
-        rooms: "Номера"
+        rooms: "Комнат"
         total_floors: "Всего этажей"
         type: "Тип"
         user: :activerecord.models.user
+        submit: "Создать обьявление"
       apartment_photo:
         apartment: :activerecord.models.apartment
         photo: "Фото"
@@ -40,18 +50,58 @@ en:
       apartment_type: "Тип квартиры"
       user: "пользователь"
   date:
-    abbr_day_names: '["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]'
-    abbr_month_names: '[nil, "янв.", "февр.", "марта", "апр.", "мая", "июня", "июля",
-      "авг.", "сент.", "окт.", "нояб.", "дек."]'
-    day_names: '["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница",
-      "суббота"]'
+    abbr_day_names:
+    - "Вс"
+    - "Пн"
+    - "Вт"
+    - "Ср"
+    - "Чт"
+    - "Пт"
+    - "Сб"
+    abbr_month_names:
+    -
+    - "янв."
+    - "февр."
+    - "марта"
+    - "апр."
+    - "мая"
+    - "июня"
+    - "июля"
+    - "авг."
+    - "сент."
+    - "окт."
+    - "нояб."
+    - "дек."
+    day_names:
+    - "воскресенье"
+    - "понедельник"
+    - "вторник"
+    - "среда"
+    - "четверг"
+    - "пятница"
+    - "суббота"
     formats:
       default: "%d.%m.%Y"
       long: "%-d %B %Y"
       short: "%-d %b"
-    month_names: '[nil, "января", "февраля", "марта", "апреля", "мая", "июня", "июля",
-      "августа", "сентября", "октября", "ноября", "декабря"]'
-    order: "[:day, :month, :year]"
+    month_names:
+    -
+    - "января"
+    - "февраля"
+    - "марта"
+    - "апреля"
+    - "мая"
+    - "июня"
+    - "июля"
+    - "августа"
+    - "сентября"
+    - "октября"
+    - "ноября"
+    - "декабря"
+    order:
+    - :day
+    - :month
+    - :year
   datetime:
     distance_in_words:
       about_x_hours:
@@ -167,25 +217,25 @@ en:
     select:
       prompt: "Выберите: "
     submit:
-      create: "Создать %{model}"
-      submit: "Сохранить %{model}"
-      update: "Сохранить %{model}"
+      create: "Создать"
+      submit: "Сохранить"
+      update: "Сохранить"
   number:
     currency:
       format:
-        delimiter: Delimiter
+        delimiter: " "
         format: "%n %u"
-        precision: '2'
+        precision: 2
         separator: ","
-        significant: Significant
-        strip_insignificant_zeros: Strip insignificant zeros
+        significant: false
+        strip_insignificant_zeros: false
         unit: "руб."
     format:
-      delimiter: Delimiter
-      precision: '3'
+      delimiter: " "
+      precision: 3
       separator: ","
-      significant: Significant
-      strip_insignificant_zeros: Strip insignificant zeros
+      significant: false
+      strip_insignificant_zeros: false
     human:
       decimal_units:
         format: "%n %u"
@@ -215,12 +265,12 @@ en:
             many: "триллионов"
             one: "триллион"
             other: "триллионов"
-          unit: Unit
+          unit: ''
       format:
-        delimiter: Delimiter
-        precision: '1'
-        significant: Significant
-        strip_insignificant_zeros: Strip insignificant zeros
+        delimiter: ''
+        precision: 1
+        significant: false
+        strip_insignificant_zeros: false
       storage_units:
         format: "%n %u"
         units:
@@ -235,11 +285,11 @@ en:
           tb: "ТБ"
     percentage:
       format:
-        delimiter: Delimiter
+        delimiter: ''
         format: "%n%"
     precision:
       format:
-        delimiter: Delimiter
+        delimiter: ''
   support:
     array:
       last_word_connector: " и "

@@ -22,13 +22,13 @@
   </div>
   <div class="nav navbar-nav pull-xs-right">
     <% if can? :create, Apartment %>
-      <%= link_to_unless_current('New Apartment', new_apartment_path, class: "nav-item btn btn-primary-outline") {} %>
+      <%= link_to_unless_current(t('links.New Apartment'), new_apartment_path, class: "nav-item btn btn-primary-outline") {} %>
     <% end %>
     <div class="user-nav nav-item pull-xs-right">
       <% if current_user %>
-      Signed in as <%= current_user.name %> | <%= link_to "Logout", logout_path %>
+      Пользователь: <%= current_user.name %> | <%= link_to "Выйти", logout_path %>
       <% else %>
-      <%= link_to 'Login', login_path %> | <%= link_to 'Signup', signup_path %>
+      <%= link_to 'Войти', login_path %> | <%= link_to 'Регистрация', signup_path %>
       <% end %>
     </div>
   </div>

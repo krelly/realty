@@ -5,7 +5,6 @@ require 'rails/all'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-
 module Realty
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -24,5 +23,6 @@ module Realty
     config.active_record.raise_in_transactional_callbacks = true
     # Do not generate scaffold css when creating with rails -g scaffold
     config.generators.stylesheets = false
+    config.i18n.default_locale = :ru
   end
 end

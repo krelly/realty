@@ -56,3 +56,11 @@ gem 'will_paginate', '~> 3.0.6'
 gem "autoprefixer-rails"
 # Manage abilities
 gem 'cancancan', '~> 1.10'
+
+gem "font-awesome-rails"
+
+gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
+gem 'i18n_generators'
+
+
+gem 'i18n-tasks', '~> 0.9.5'

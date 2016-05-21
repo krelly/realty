@@ -12,23 +12,23 @@
   </div>
 
   <p>
-    <strong>Floor:</strong>
+    <strong>Этаж:</strong>
     <%= @apartment.floor %> / <%= @apartment.total_floors %>
   </p>
 
 
   <p>
-    <strong>Rooms:</strong>
+    <strong>Количество комнат:</strong>
     <%= @apartment.rooms %>
   </p>
 
   <p>
-    <strong>Area:</strong>
+    <strong>Площадь:</strong>
     <%= @apartment.area %>
   </p>
 
   <p>
-    <strong>Description:</strong>
+    <strong>Описание от продавца:</strong>
     <%= @apartment.description %>
   </p>
   <strong>Телефон представителя:</strong> <%= @apartment.user.phone_number %>
@@ -56,6 +56,6 @@
 
 <%= content_tag("div",nil,id:'interactive-map', data: {latitude: @apartment.latitude, longitude: @apartment.longitude}) %>
 <% if can? :edit, @apartment %>
-  <%= link_to 'Edit', edit_apartment_path(@apartment) %>&nbsp;|&nbsp;
+  <%= link_to t('links.edit'), edit_apartment_path(@apartment) %>&nbsp;|&nbsp;
 <% end %>
-<%= link_to 'Back', apartments_path %>
+<%= link_to t('links.back'), apartments_path %>
