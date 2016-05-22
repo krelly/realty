@@ -73,7 +73,7 @@
 <div class="form-group row">
   <%= f.label :type, class: "col-sm-2" %>
   <div class="col-sm-10">
-    <%= f.select :apartment_type, Apartment.apartment_types.keys, class:"form-control"  %>
+    <%= f.select :apartment_type, Apartment.apartment_types.map{|k,v| [t("types.#{k}"), k]}, class:"form-control"  %>
   </div>
 </div>
 
