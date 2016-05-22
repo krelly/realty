@@ -21,8 +21,8 @@ class ApartmentsController < ApplicationController
 
   def within_box
     sw_lat, sw_lon, ne_lat, ne_lon = params[:bounds].split(',')
-    @sw = Geokit::LatLng.new(sw_lat,sw_lon)#55.59947660499516,36.92777694702146
-    @ne = Geokit::LatLng.new(ne_lat,ne_lon)#55.832043988964585,38.22485031127929
+    @sw = Geokit::LatLng.new(sw_lat,sw_lon)
+    @ne = Geokit::LatLng.new(ne_lat,ne_lon)
     @apartments = Apartment.all
     points = Apartment.in_bounds([@sw, @ne], :origin => @somewhere).pluck(:id, :latitude, :longitude)
 
@@ -30,7 +30,7 @@ class ApartmentsController < ApplicationController
       {
         id: point[0],
         geometry: {type: "Point", coordinates: point[1,2]},
-        properties: {"balloonContent": "Содержимое балуна"}
+        properties: {}
       }
     end
     respond_to do |format|
@@ -90,10 +90,7 @@ class ApartmentsController < ApplicationController
             @apartment_photos = @apartment.apartment_photos.create!(photo: a, apartment_id: @apartment.id)
           end
         end
-        # if params[:apartment_photos]
-        #   puts
-        #   # @apartment.apartment_photos.update(apartment_photos_params)
-        # end
+
         format.html { redirect_to @apartment, notice: 'Apartment was successfully updated.' }
         format.json { render :show, status: :ok, location: @apartment }
       else
