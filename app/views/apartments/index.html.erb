@@ -10,21 +10,21 @@
     <div class="info">
       <div class="apartment-title">
         <%= link_to(apartment) do %>
-          2-x комнатная квартира <%= apartment.address %>
+          <%= apartment.rooms %> к. квартира <%= apartment.address %>
         <% end %>
         <div class="controls">
           <% if can? :edit, apartment %>
-          <%= link_to '', edit_apartment_path(apartment), class: "fa fa-pencil" %>
+          <%= link_to '', edit_apartment_path(apartment), class: "edit fa fa-pencil" %>
           <% end %>
           <% if can? :destroy, apartment %>
-          <%= link_to '', apartment, method: :delete, data: { confirm: 'Are you sure?' }, class:"fa fa-trash-o" %>
+          <%= link_to '', apartment, method: :delete, data: { confirm: 'Are you sure?' }, class:"delete fa fa-trash-o" %>
           <% end %>
         </div>
       </div>
       <div class="description">
         <%= apartment.description %>
       </div>
-      <div class="price"><%= apartment.price %></div>
+      <div class="price"><%= apartment.price %> $</div>
     </div>
   </div>
   <% end %>
