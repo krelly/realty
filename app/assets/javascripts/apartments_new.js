@@ -65,6 +65,7 @@ function YmapsReady() {
         suggestView.events.add('select', e => {
             var address = e.get('item').value
             input.val(address)
+            e.preventDefault();
         })
 
     }
@@ -85,72 +86,54 @@ function YmapsReady() {
 
     if ($(".apartments.map").length) {
 
-        var myMap,
-            defaultMapOptions = {
-                center: [55.751574, 37.573856],
-                zoom: 12,
-                behaviors: ['default', 'scrollZoom']
-            },
-            createMap = function (options) {
-                return new ymaps.Map('map', options);
-            },
-            onSuccess = function (res) {
-                var geoObject = res.geoObjects.get(0),
-                    mapOptions = geoObject && {
-                        bounds: geoObject.properties.get('boundedBy')
-                    };
-                if (geoObject) {
-                    defaultMapOptions.center = geoObject.geometry._coordinates
-                    myMap = createMap(defaultMapOptions)
-                } else {
-                    myMap = createMap(mapOptions)
-                }
-            }
-        onError = function (err) {
-            console.log(err);
-            myMap = createMap(defaultMapOptions);
-        }
+        var myMap = new ymaps.Map('map', {
+            center: [50.45466, 30.5238],
+            zoom: 12,
+            behaviors: ['default', 'scrollZoom']
+        })
 
-        ymaps.geolocation.get({
-                autoReverseGeocode: true
-            })
-            .then(onSuccess, onError)
-            .then(() => {
-                var customBalloonContentLayout = ymaps.templateLayoutFactory.createClass(
-                    // Выводим в цикле список всех геообъектов.
-                    `<ul class=list>
-                      {% for geoObject in properties.geoObjects %}
-                          <li><a href=# data-placemarkid="{{ geoObject.properties.placemarkId }}" class="list_item">{{ geoObject.properties.balloonContentHeader|raw }}</a></li>
-                      {% endfor %}
-                     </ul>`);
-                objectManager = new ymaps.LoadingObjectManager('/within_box?bounds=%b', {
-                    // Чтобы метки начали кластеризоваться, выставляем опцию.
-                    clusterize: true,
-                    // ObjectManager принимает те же опции, что и кластеризатор.
-                    gridSize: 64,
-                    clusterDisableClickZoom: true,
-                    clusterOpenBalloonOnClick: true,
-                    // Устанавливаем режим открытия балуна.
-                    // В данном примере балун никогда не будет открываться в режиме панели.
-                    clusterBalloonPanelMaxMapArea: 0,
-                    // По умолчанию опции балуна balloonMaxWidth и balloonMaxHeight не установлены для кластеризатора,
-                    // так как все стандартные макеты имеют определенные размеры.
-                    clusterBalloonMaxHeight: 200,
-                    // Устанавливаем собственный макет контента балуна.
-                    clusterBalloonContentLayout: customBalloonContentLayout
-                });
+        initObjectManager(myMap)
+    }
+}
 
-                // Чтобы задать опции одиночным объектам и кластерам,
-                // обратимся к дочерним коллекциям ObjectManager.
-                objectManager.objects.options.set('preset', 'islands#greenDotIcon');
-                objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
-                objectManager.objects.events.add('click', function (e) {
-                    var objectId = e.get('objectId');
-                    loadBalloonData(objectId).then(function (data) {
+function initObjectManager(myMap) {
+    var customBalloonContentLayout = ymaps.templateLayoutFactory.createClass(
+        // Выводим в цикле список всех геообъектов.
+        `<ul class=list>
+          {% for geoObject in properties.geoObjects %}
+              <li><a href=# data-placemarkid="{{ geoObject.properties.placemarkId }}" class="list_item">
+                {{ geoObject.properties.balloonContentHeader|raw }}
+              </a></li>
+          {% endfor %}
+         </ul>`);
+    objectManager = new ymaps.LoadingObjectManager('/within_box?bounds=%b', {
+        // Чтобы метки начали кластеризоваться, выставляем опцию.
+        clusterize: true,
+        // ObjectManager принимает те же опции, что и кластеризатор.
+        gridSize: 64,
+        clusterDisableClickZoom: true,
+        clusterOpenBalloonOnClick: true,
+        // Устанавливаем режим открытия балуна.
+        // В данном примере балун никогда не будет открываться в режиме панели.
+        clusterBalloonPanelMaxMapArea: 0,
+        // По умолчанию опции балуна balloonMaxWidth и balloonMaxHeight не установлены для кластеризатора,
+        // так как все стандартные макеты имеют определенные размеры.
+        clusterBalloonMaxHeight: 200,
+        // Устанавливаем собственный макет контента балуна.
+        clusterBalloonContentLayout: customBalloonContentLayout
+    });
 
-                        var obj = objectManager.objects.getById(objectId);
-                        console.dir(data)
-                        obj.properties.balloonContent = `
+    // Чтобы задать опции одиночным объектам и кластерам,
+    // обратимся к дочерним коллекциям ObjectManager.
+    objectManager.objects.options.set('preset', 'islands#greenDotIcon');
+    objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+    objectManager.objects.events.add('click', function (e) {
+        var objectId = e.get('objectId');
+        loadBalloonData(objectId).then(function (data) {
+
+            var obj = objectManager.objects.getById(objectId);
+            console.dir(data)
+            obj.properties.balloonContent = `
                         <div class="apartment-card">
                             <div class="photo"><img src="${data.photo}"></div>
                             <a href="/apartments/${data.id}">
@@ -160,12 +143,10 @@ function YmapsReady() {
                             <div class="price">${data.price}$</div>
                         </div>
                         `;
-                        objectManager.objects.balloon.open(objectId);
-                    })
-                });
-                myMap.geoObjects.add(objectManager);
-            })
-    }
+            objectManager.objects.balloon.open(objectId);
+        })
+    });
+    myMap.geoObjects.add(objectManager);
 }
 
 function loadBalloonData(id) {
