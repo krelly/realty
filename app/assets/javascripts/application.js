@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require suggestView-2.1.js
-// require ymaps2.1-dev.js
+//= require ymaps2.1.js
 //= require pluralize
 //= require_tree .
