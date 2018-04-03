@@ -12,6 +12,8 @@ default: &default
   pool: 5
   username: postgres
   password:
+  port: 5432
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
 
 
 development:
