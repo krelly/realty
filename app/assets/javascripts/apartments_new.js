@@ -97,30 +97,18 @@ function YmapsReady() {
 }
 
 function initObjectManager(myMap) {
-    var customBalloonContentLayout = ymaps.templateLayoutFactory.createClass(
-        // Выводим в цикле список всех геообъектов.
-        `<ul class=list>
-          {% for geoObject in properties.geoObjects %}
-              <li><a href=# data-placemarkid="{{ geoObject.properties.placemarkId }}" class="list_item">
-                {{ geoObject.properties.balloonContentHeader|raw }}
-              </a></li>
-          {% endfor %}
-         </ul>`);
+
     objectManager = new ymaps.LoadingObjectManager('/within_box?bounds=%b', {
         // Чтобы метки начали кластеризоваться, выставляем опцию.
         clusterize: true,
         // ObjectManager принимает те же опции, что и кластеризатор.
         gridSize: 64,
-        clusterDisableClickZoom: true,
-        clusterOpenBalloonOnClick: true,
         // Устанавливаем режим открытия балуна.
         // В данном примере балун никогда не будет открываться в режиме панели.
         clusterBalloonPanelMaxMapArea: 0,
         // По умолчанию опции балуна balloonMaxWidth и balloonMaxHeight не установлены для кластеризатора,
         // так как все стандартные макеты имеют определенные размеры.
         clusterBalloonMaxHeight: 200,
-        // Устанавливаем собственный макет контента балуна.
-        clusterBalloonContentLayout: customBalloonContentLayout
     });
 
     // Чтобы задать опции одиночным объектам и кластерам,
