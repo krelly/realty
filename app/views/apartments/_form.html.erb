@@ -1,9 +1,10 @@
 
 <%= form_for(@apartment) do |f| %>
 <% if @apartment.errors.any? %>
-<div id="error_explanation">
-    <h2><%= pluralize(@apartment.errors.count, "error") %>
-        prohibited this apartment from being saved:</h2>
+<div id="error_explanation" class="alert alert-danger">
+    <h2><%= t('errors.template.header',
+              :model => Apartment.model_name.human, :count => @apartment.errors.count) %>
+    </h2>
 
     <ul>
         <% @apartment.errors.full_messages.each do |message| %>
@@ -24,7 +25,7 @@
   <%= f.label :floor,class:"col-sm-2 " %>
 
   <div class="col-sm-10 input-group ">
-    <%= f.number_field :floor, class:"form-control" %>
+    <%= f.number_field :floor, class:"form-control", min: 1 %>
     <span class="input-group-addon">Этажность</span>
     <%= f.number_field :total_floors, class:"form-control" %>
   </div>
@@ -37,7 +38,7 @@
     </div>
 </div>
 <div class="form-group row">
-    <%= f.label :rooms, class: "col-sm-2" %>
+    <%= f.label :rooms, class: "col-sm-2", min: 1 %>
     <div class="col-sm-10">
       <%= f.number_field :rooms, class:"form-control" %>
     </div>
@@ -83,16 +84,15 @@
     Перетащите файлы сюда или <label for="apartment-image">выберите файл</label>
     <div class="comment">Первая фотография будет отображаться в результатах поиска</div>
     <div class="img-preview">
+      <div class="upload">
+        <%= f.file_field :photo, :multiple => true, name: "apartment_photos[photo][]" %>
+      </div>
       <%= f.fields_for :apartment_photos do |photo| %>
-        <% if photo.object.new_record? %>
-        <div class="upload">
-          <%= photo.file_field :photo, :multiple => true, name: "apartment_photos[photo][]" %>
-        </div>
-        <% else %>
-        <div class="preview">
-          <%= image_tag(photo.object.photo_url) %>
-          <%= photo.check_box :_destroy %>
-        </div>
+        <% if !photo.object.new_record? %>
+          <div class="preview">
+            <%= image_tag(photo.object.photo_url) %>
+            <%= photo.check_box :_destroy %>
+          </div>
         <% end %>
       <% end %>
 
@@ -100,7 +100,7 @@
 </div>
 
 
-<div class="ymap" data-address="Москва, Кремль">
+<div class="ymap" data-address="Киев, Украина">
 
 </div>
 <div class="actions">
