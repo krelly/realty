@@ -15,6 +15,6 @@ class Apartment < ActiveRecord::Base
   after_validation :geocode, :if => :address_changed?
   validates :floor, :numericality => { :greater_than_or_equal_to => 1 }
   validates :rooms, :numericality => { :greater_than_or_equal_to => 1 }
-  accepts_nested_attributes_for :apartment_photos, :allow_destroy => true
-  validates :user_id, presence: true
+  accepts_nested_attributes_for :apartment_photos, allow_destroy: true
+  validates_presence_of :total_floors, :address
 end
