@@ -13,6 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require ymaps2.1.js
 //= require pluralize
 //= require_tree .

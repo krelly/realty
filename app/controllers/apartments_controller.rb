@@ -43,7 +43,7 @@ class ApartmentsController < ApplicationController
     @apartment_photos = @apartment.apartment_photos
     respond_to do |format|
       format.html
-      format.json { render :json => @apartment.attributes.merge( {photo: @apartment_photos.first.photo_url} ) }
+      format.json { render :json => @apartment.attributes.merge( {photo: @apartment_photos.first&.photo_url} ) }
     end
   end
 

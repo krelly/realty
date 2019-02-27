@@ -5,6 +5,8 @@
     <div class="photo">
       <% if apartment.apartment_photos.first %>
         <%= image_tag apartment.apartment_photos.first.photo_url %>
+      <% else %>
+        <%= image_tag "fallback/default.png" %>
       <% end %>
     </div>
     <div class="info">
